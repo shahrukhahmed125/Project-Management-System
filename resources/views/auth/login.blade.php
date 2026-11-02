@@ -4,11 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign In — WorkSphere</title>
-  <meta name="description" content="Sign in to your WorkSphere software company workspace.">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/components.css">
-  <link rel="stylesheet" href="../assets/css/responsive.css">
-  <link rel="stylesheet" href="../assets/css/themes.css">
+  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/themes.css') }}">
 </head>
 <body style="display:flex; align-items:center; justify-content:center; min-height:100vh; background:var(--background); padding:1.5rem;">
 
@@ -56,6 +55,6 @@
     </div>
   </div>
 
-  <script src="../assets/js/theme.js"></script>
+  <script src="{{ asset('assets/js/theme.js') }}"></script>
 </body>
 </html>
