@@ -1,0 +1,108 @@
+/* ==========================================================================
+   WorkSphere — Theme & Dark Mode Styling
+   Pure CSS Variables + Print Optimization
+   ========================================================================== */
+
+[data-theme="dark"] {
+  --background: #0f172a;
+  --background-glow: rgba(99, 102, 241, 0.18);
+  --surface: #1e293b;
+  --surface-subtle: #192237;
+  --surface-raised: #243049;
+
+  --sidebar: #0b0f19;
+  --sidebar-hover: #172138;
+  --sidebar-active: #243049;
+  --sidebar-border: #1e293b;
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-inverse: #0f172a;
+
+  --border: #2e3c54;
+  --border-focus: #6366f1;
+
+  --primary-subtle: rgba(99, 102, 241, 0.18);
+  --success-subtle: rgba(22, 163, 74, 0.18);
+  --warning-subtle: rgba(245, 158, 11, 0.18);
+  --danger-subtle: rgba(220, 38, 38, 0.18);
+  --info-subtle: rgba(37, 99, 235, 0.18);
+
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .top-header {
+  background: rgba(15, 23, 42, 0.82);
+}
+
+[data-theme="dark"] .sidebar {
+  background: linear-gradient(180deg, #0b0f19 0%, #111827 100%);
+}
+
+[data-theme="dark"] .table tbody tr:hover {
+  background-color: #243049;
+}
+
+[data-theme="dark"] .kanban-column {
+  background-color: #172138;
+  border-color: #2e3c54;
+}
+
+[data-theme="dark"] .kanban-column-header {
+  border-color: #2e3c54;
+}
+
+[data-theme="dark"] .kanban-column-count {
+  background-color: #2e3c54;
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .chat-wrapper {
+  background-color: #1e293b;
+}
+
+[data-theme="dark"] .chat-sidebar {
+  background-color: #172138;
+}
+
+[data-theme="dark"] .chat-channel-item:hover {
+  background-color: #243049;
+}
+
+[data-theme="dark"] .badge-neutral {
+  background-color: #2e3c54;
+  color: #94a3b8;
+}
+
+/* Print Styles */
+@media print {
+  .sidebar,
+  .top-header,
+  .page-header-actions,
+  .table-toolbar,
+  .pagination,
+  .toast-container,
+  .modal,
+  .timer-actions {
+    display: none !important;
+  }
+
+  .app-main {
+    margin-left: 0 !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .card, .table-container {
+    border: 1px solid #000000 !important;
+    box-shadow: none !important;
+  }
+}
