@@ -12,26 +12,26 @@ class HolidayPolicy
 
     public function viewAny(User $user)
     {
-        return $user->can('view holidays');
+        return $user->can('holidays.view');
     }
 
     public function view(User $user, Holiday $holiday)
     {
-        return $user->can('view holidays');
+        return $user->can('holidays.view');
     }
 
     public function create(User $user)
     {
-        return $user->can('create holidays');
+        return $user->can('holidays.create');
     }
 
     public function update(User $user, Holiday $holiday)
     {
-        return $user->can('edit holidays');
+        return $user->can('holidays.update');
     }
 
     public function delete(User $user, Holiday $holiday)
     {
-        return $user->can('delete holidays');
+        return $user->can('holidays.delete');
     }
 }

@@ -33,87 +33,87 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Company
-    Route::prefix('company')->name('company.')->middleware(['can:view company'])->group(function () {
+    Route::prefix('company')->name('company.')->middleware(['can:company.view'])->group(function () {
         Route::get('/profile', [CompanyController::class, 'profile'])->name('profile');
-        Route::post('/profile', [CompanyController::class, 'updateProfile'])->name('profile.update')->middleware('can:edit company');
+        Route::post('/profile', [CompanyController::class, 'updateProfile'])->name('profile.update')->middleware('can:company.update');
         Route::get('/settings', [CompanyController::class, 'settings'])->name('settings');
-        Route::post('/settings', [CompanyController::class, 'updateSettings'])->name('settings.update')->middleware('can:edit company');
+        Route::post('/settings', [CompanyController::class, 'updateSettings'])->name('settings.update')->middleware('can:company.settings');
     });
 
     // Organisation - Departments
-    Route::prefix('organisation/departments')->name('organisation.departments.')->middleware(['can:view departments'])->group(function () {
+    Route::prefix('organisation/departments')->name('organisation.departments.')->middleware(['can:departments.view'])->group(function () {
         Route::get('/', [DepartmentController::class, 'index'])->name('index');
-        Route::get('/create', [DepartmentController::class, 'create'])->name('create')->middleware('can:create departments');
-        Route::post('/', [DepartmentController::class, 'store'])->name('store')->middleware('can:create departments');
+        Route::get('/create', [DepartmentController::class, 'create'])->name('create')->middleware('can:departments.create');
+        Route::post('/', [DepartmentController::class, 'store'])->name('store')->middleware('can:departments.create');
         Route::get('/{department}', [DepartmentController::class, 'show'])->name('show');
-        Route::get('/{department}/edit', [DepartmentController::class, 'edit'])->name('edit')->middleware('can:edit departments');
-        Route::put('/{department}', [DepartmentController::class, 'update'])->name('update')->middleware('can:edit departments');
-        Route::delete('/{department}', [DepartmentController::class, 'destroy'])->name('destroy')->middleware('can:delete departments');
-        Route::post('/{department}/toggle-status', [DepartmentController::class, 'toggleStatus'])->name('toggle-status')->middleware('can:edit departments');
+        Route::get('/{department}/edit', [DepartmentController::class, 'edit'])->name('edit')->middleware('can:departments.update');
+        Route::put('/{department}', [DepartmentController::class, 'update'])->name('update')->middleware('can:departments.update');
+        Route::delete('/{department}', [DepartmentController::class, 'destroy'])->name('destroy')->middleware('can:departments.delete');
+        Route::post('/{department}/toggle-status', [DepartmentController::class, 'toggleStatus'])->name('toggle-status')->middleware('can:departments.update');
     });
 
     // Organisation - Designations
-    Route::prefix('organisation/designations')->name('organisation.designations.')->middleware(['can:view designations'])->group(function () {
+    Route::prefix('organisation/designations')->name('organisation.designations.')->middleware(['can:designations.view'])->group(function () {
         Route::get('/', [DesignationController::class, 'index'])->name('index');
-        Route::get('/create', [DesignationController::class, 'create'])->name('create')->middleware('can:create designations');
-        Route::post('/', [DesignationController::class, 'store'])->name('store')->middleware('can:create designations');
+        Route::get('/create', [DesignationController::class, 'create'])->name('create')->middleware('can:designations.create');
+        Route::post('/', [DesignationController::class, 'store'])->name('store')->middleware('can:designations.create');
         Route::get('/{designation}', [DesignationController::class, 'show'])->name('show');
-        Route::get('/{designation}/edit', [DesignationController::class, 'edit'])->name('edit')->middleware('can:edit designations');
-        Route::put('/{designation}', [DesignationController::class, 'update'])->name('update')->middleware('can:edit designations');
-        Route::delete('/{designation}', [DesignationController::class, 'destroy'])->name('destroy')->middleware('can:delete designations');
+        Route::get('/{designation}/edit', [DesignationController::class, 'edit'])->name('edit')->middleware('can:designations.update');
+        Route::put('/{designation}', [DesignationController::class, 'update'])->name('update')->middleware('can:designations.update');
+        Route::delete('/{designation}', [DesignationController::class, 'destroy'])->name('destroy')->middleware('can:designations.delete');
     });
 
     // Organisation - Teams
-    Route::prefix('organisation/teams')->name('organisation.teams.')->middleware(['can:view teams'])->group(function () {
+    Route::prefix('organisation/teams')->name('organisation.teams.')->middleware(['can:teams.view'])->group(function () {
         Route::get('/', [TeamController::class, 'index'])->name('index');
-        Route::get('/create', [TeamController::class, 'create'])->name('create')->middleware('can:create teams');
-        Route::post('/', [TeamController::class, 'store'])->name('store')->middleware('can:create teams');
+        Route::get('/create', [TeamController::class, 'create'])->name('create')->middleware('can:teams.create');
+        Route::post('/', [TeamController::class, 'store'])->name('store')->middleware('can:teams.create');
         Route::get('/{team}', [TeamController::class, 'show'])->name('show');
-        Route::get('/{team}/edit', [TeamController::class, 'edit'])->name('edit')->middleware('can:edit teams');
-        Route::put('/{team}', [TeamController::class, 'update'])->name('update')->middleware('can:edit teams');
-        Route::delete('/{team}', [TeamController::class, 'destroy'])->name('destroy')->middleware('can:delete teams');
-        Route::post('/{team}/members', [TeamController::class, 'addMember'])->name('add-member')->middleware('can:edit teams');
-        Route::delete('/{team}/members/{employee}', [TeamController::class, 'removeMember'])->name('remove-member')->middleware('can:edit teams');
+        Route::get('/{team}/edit', [TeamController::class, 'edit'])->name('edit')->middleware('can:teams.update');
+        Route::put('/{team}', [TeamController::class, 'update'])->name('update')->middleware('can:teams.update');
+        Route::delete('/{team}', [TeamController::class, 'destroy'])->name('destroy')->middleware('can:teams.delete');
+        Route::post('/{team}/members', [TeamController::class, 'addMember'])->name('add-member')->middleware('can:teams.update');
+        Route::delete('/{team}/members/{employee}', [TeamController::class, 'removeMember'])->name('remove-member')->middleware('can:teams.update');
     });
 
     // Employees
-    Route::prefix('employees')->name('employees.')->middleware(['can:view employees'])->group(function () {
+    Route::prefix('employees')->name('employees.')->middleware(['can:employees.view'])->group(function () {
         Route::get('/', [EmployeeController::class, 'index'])->name('index');
-        Route::get('/create', [EmployeeController::class, 'create'])->name('create')->middleware('can:create employees');
-        Route::post('/', [EmployeeController::class, 'store'])->name('store')->middleware('can:create employees');
+        Route::get('/create', [EmployeeController::class, 'create'])->name('create')->middleware('can:employees.create');
+        Route::post('/', [EmployeeController::class, 'store'])->name('store')->middleware('can:employees.create');
         Route::get('/{employee}', [EmployeeController::class, 'show'])->name('show');
-        Route::get('/{employee}/edit', [EmployeeController::class, 'edit'])->name('edit')->middleware('can:edit employees');
-        Route::put('/{employee}', [EmployeeController::class, 'update'])->name('update')->middleware('can:edit employees');
-        Route::delete('/{employee}', [EmployeeController::class, 'destroy'])->name('destroy')->middleware('can:delete employees');
-        Route::post('/{employee}/toggle-status', [EmployeeController::class, 'toggleStatus'])->name('toggle-status')->middleware('can:edit employees');
+        Route::get('/{employee}/edit', [EmployeeController::class, 'edit'])->name('edit')->middleware('can:employees.update');
+        Route::put('/{employee}', [EmployeeController::class, 'update'])->name('update')->middleware('can:employees.update');
+        Route::delete('/{employee}', [EmployeeController::class, 'destroy'])->name('destroy')->middleware('can:employees.delete');
+        Route::post('/{employee}/toggle-status', [EmployeeController::class, 'toggleStatus'])->name('toggle-status')->middleware('can:employees.update');
         Route::get('/{employee}/profile', [EmployeeController::class, 'profile'])->name('profile');
     });
 
     // Configuration - Office Locations
-    Route::prefix('configuration/locations')->name('configuration.locations.')->middleware(['can:view locations'])->group(function () {
+    Route::prefix('configuration/locations')->name('configuration.locations.')->middleware(['can:locations.view'])->group(function () {
         Route::get('/', [OfficeLocationController::class, 'index'])->name('index');
-        Route::get('/create', [OfficeLocationController::class, 'create'])->name('create')->middleware('can:create locations');
-        Route::post('/', [OfficeLocationController::class, 'store'])->name('store')->middleware('can:create locations');
+        Route::get('/create', [OfficeLocationController::class, 'create'])->name('create')->middleware('can:locations.create');
+        Route::post('/', [OfficeLocationController::class, 'store'])->name('store')->middleware('can:locations.create');
         Route::get('/{location}', [OfficeLocationController::class, 'show'])->name('show');
-        Route::get('/{location}/edit', [OfficeLocationController::class, 'edit'])->name('edit')->middleware('can:edit locations');
-        Route::put('/{location}', [OfficeLocationController::class, 'update'])->name('update')->middleware('can:edit locations');
-        Route::delete('/{location}', [OfficeLocationController::class, 'destroy'])->name('destroy')->middleware('can:delete locations');
+        Route::get('/{location}/edit', [OfficeLocationController::class, 'edit'])->name('edit')->middleware('can:locations.update');
+        Route::put('/{location}', [OfficeLocationController::class, 'update'])->name('update')->middleware('can:locations.update');
+        Route::delete('/{location}', [OfficeLocationController::class, 'destroy'])->name('destroy')->middleware('can:locations.delete');
     });
 
     // Configuration - Working Hours
-    Route::prefix('configuration/working-hours')->name('configuration.working-hours.')->middleware(['can:view working hours'])->group(function () {
+    Route::prefix('configuration/working-hours')->name('configuration.working-hours.')->middleware(['can:working_hours.view'])->group(function () {
         Route::get('/', [WorkingHourController::class, 'index'])->name('index');
-        Route::post('/', [WorkingHourController::class, 'update'])->name('update')->middleware('can:edit working hours');
+        Route::post('/', [WorkingHourController::class, 'update'])->name('update')->middleware('can:working_hours.manage');
     });
 
     // Configuration - Holidays
-    Route::prefix('configuration/holidays')->name('configuration.holidays.')->middleware(['can:view holidays'])->group(function () {
+    Route::prefix('configuration/holidays')->name('configuration.holidays.')->middleware(['can:holidays.view'])->group(function () {
         Route::get('/', [HolidayController::class, 'index'])->name('index');
-        Route::get('/create', [HolidayController::class, 'create'])->name('create')->middleware('can:create holidays');
-        Route::post('/', [HolidayController::class, 'store'])->name('store')->middleware('can:create holidays');
+        Route::get('/create', [HolidayController::class, 'create'])->name('create')->middleware('can:holidays.create');
+        Route::post('/', [HolidayController::class, 'store'])->name('store')->middleware('can:holidays.create');
         Route::get('/{holiday}', [HolidayController::class, 'show'])->name('show');
-        Route::get('/{holiday}/edit', [HolidayController::class, 'edit'])->name('edit')->middleware('can:edit holidays');
-        Route::put('/{holiday}', [HolidayController::class, 'update'])->name('update')->middleware('can:edit holidays');
-        Route::delete('/{holiday}', [HolidayController::class, 'destroy'])->name('destroy')->middleware('can:delete holidays');
+        Route::get('/{holiday}/edit', [HolidayController::class, 'edit'])->name('edit')->middleware('can:holidays.update');
+        Route::put('/{holiday}', [HolidayController::class, 'update'])->name('update')->middleware('can:holidays.update');
+        Route::delete('/{holiday}', [HolidayController::class, 'destroy'])->name('destroy')->middleware('can:holidays.delete');
     });
 });

@@ -17,12 +17,7 @@
     <div class="card-body">
       <div id="toastContainer" style="position:fixed; top:20px; right:20px; z-index:9999;"></div>
 
-      <x-ajax-form
-        formId="createEmployeeForm"
-        btnId="createEmployeeBtn"
-        :action="route('employees.store')"
-        method="POST"
-      >
+      <form id="createEmployeeForm" action="{{ route('employees.store') }}" method="POST">
         @csrf
 
         <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:1rem; padding-bottom:0.5rem; border-bottom:1px solid var(--border);">Account Information</h3>
@@ -149,7 +144,14 @@
             </svg>
           </span>
         </button>
-      </x-ajax-form>
+      </form>
+
+      <x-ajax-form
+        formId="createEmployeeForm"
+        btnId="createEmployeeBtn"
+        :action="route('employees.store')"
+        method="POST"
+      />
     </div>
   </div>
 </div>

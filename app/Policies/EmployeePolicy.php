@@ -12,31 +12,31 @@ class EmployeePolicy
 
     public function viewAny(User $user)
     {
-        return $user->can('view employees');
+        return $user->can('employees.view');
     }
 
     public function view(User $user, Employee $employee)
     {
-        return $user->can('view employees') || $user->employee->id === $employee->id;
+        return $user->can('employees.view') || $user->employee->id === $employee->id;
     }
 
     public function create(User $user)
     {
-        return $user->can('create employees');
+        return $user->can('employees.create');
     }
 
     public function update(User $user, Employee $employee)
     {
-        return $user->can('edit employees') || $user->employee->id === $employee->id;
+        return $user->can('employees.update') || $user->employee->id === $employee->id;
     }
 
     public function delete(User $user, Employee $employee)
     {
-        return $user->can('delete employees');
+        return $user->can('employees.delete');
     }
 
     public function toggleStatus(User $user, Employee $employee)
     {
-        return $user->can('edit employees');
+        return $user->can('employees.update');
     }
 }

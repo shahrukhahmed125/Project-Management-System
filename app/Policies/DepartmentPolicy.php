@@ -12,26 +12,26 @@ class DepartmentPolicy
 
     public function viewAny(User $user)
     {
-        return $user->can('view departments');
+        return $user->can('departments.view');
     }
 
     public function view(User $user, Department $department)
     {
-        return $user->can('view departments');
+        return $user->can('departments.view');
     }
 
     public function create(User $user)
     {
-        return $user->can('create departments');
+        return $user->can('departments.create');
     }
 
     public function update(User $user, Department $department)
     {
-        return $user->can('edit departments');
+        return $user->can('departments.update');
     }
 
     public function delete(User $user, Department $department)
     {
-        return $user->can('delete departments');
+        return $user->can('departments.delete');
     }
 }

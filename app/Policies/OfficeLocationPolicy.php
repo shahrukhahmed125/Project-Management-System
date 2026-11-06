@@ -12,26 +12,26 @@ class OfficeLocationPolicy
 
     public function viewAny(User $user)
     {
-        return $user->can('view locations');
+        return $user->can('locations.view');
     }
 
     public function view(User $user, OfficeLocation $location)
     {
-        return $user->can('view locations');
+        return $user->can('locations.view');
     }
 
     public function create(User $user)
     {
-        return $user->can('create locations');
+        return $user->can('locations.create');
     }
 
     public function update(User $user, OfficeLocation $location)
     {
-        return $user->can('edit locations');
+        return $user->can('locations.update');
     }
 
     public function delete(User $user, OfficeLocation $location)
     {
-        return $user->can('delete locations');
+        return $user->can('locations.delete');
     }
 }

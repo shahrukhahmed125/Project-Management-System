@@ -18,13 +18,13 @@ class CompanyController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'nullable|email|max:255',
-            'phone' => 'nullable|string|max:20',
+            'legal_name' => 'nullable|string|max:255',
+            'registration_number' => 'nullable|string|max:255',
+            'tax_id' => 'nullable|string|max:255',
+            'industry' => 'nullable|string|max:255',
+            'company_size' => 'nullable|string|max:50',
             'website' => 'nullable|url|max:255',
-            'address' => 'nullable|string|max:500',
-            'city' => 'nullable|string|max:255',
-            'country' => 'nullable|string|max:255',
-            'postal_code' => 'nullable|string|max:20',
+            'founded_date' => 'nullable|date',
             'description' => 'nullable|string|max:2000',
         ]);
 
@@ -38,17 +38,25 @@ class CompanyController extends Controller
 
     public function settings()
     {
-        $settings = CompanySetting::all()->groupBy('group');
+        $settings = CompanySetting::pluck('value', 'key')->toArray();
         return view('company.settings', compact('settings'));
     }
 
     public function updateSettings(Request $request)
     {
-        foreach ($request->settings as $key => $value) {
-            CompanySetting::updateOrCreate(
-                ['key' => $key],
-                ['value' => $value, 'type' => 'string']
-            );
+        $data = $request->all();
+
+        // Handle checkboxes - unchecked checkboxes aren't sent in form submissions
+        $data['email_notifications'] = $request->has('email_notifications') ? true : false;
+        $data['slack_notifications'] = $request->has('slack_notifications') ? true : false;
+
+        foreach ($data as $key => $value) {
+            if (in_array($key, ['timezone', 'date_format', 'currency', 'email_notifications', 'slack_notifications'])) {
+                CompanySetting::updateOrCreate(
+                    ['key' => $key],
+                    ['value' => $value, 'type' => is_bool($value) ? 'boolean' : 'string']
+                );
+            }
         }
 
         return response()->json([

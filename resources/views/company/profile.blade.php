@@ -14,14 +14,9 @@
     <div class="card-body">
       <div id="toastContainer" style="position:fixed; top:20px; right:20px; z-index:9999;"></div>
 
-      <x-ajax-form
-        formId="companyProfileForm"
-        btnId="companyProfileBtn"
-        :action="route('company.profile.update')"
-        method="PUT"
-      >
+      <form id="companyProfileForm" action="{{ route('company.profile.update') }}" method="POST">
         @csrf
-        @method('PUT')
+        <input type="hidden" name="_method" value="PUT">
 
         <div class="form-group">
           <label class="form-label">Company Name *</label>
@@ -84,10 +79,17 @@
             </svg>
           </span>
         </button>
-      </x-ajax-form>
+      </form>
     </div>
   </div>
 </div>
+
+<x-ajax-form
+  formId="companyProfileForm"
+  btnId="companyProfileBtn"
+  :action="route('company.profile.update')"
+  method="PUT"
+/>
 
 <style>
   @keyframes spin {

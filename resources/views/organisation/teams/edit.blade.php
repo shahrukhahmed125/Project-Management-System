@@ -17,14 +17,9 @@
     <div class="card-body">
       <div id="toastContainer" style="position:fixed; top:20px; right:20px; z-index:9999;"></div>
 
-      <x-ajax-form
-        formId="editTeamForm"
-        btnId="editTeamBtn"
-        :action="route('organisation.teams.update', $team)"
-        method="PUT"
-      >
+      <form id="editTeamForm" action="{{ route('organisation.teams.update', $team) }}" method="POST">
         @csrf
-        @method('PUT')
+        <input type="hidden" name="_method" value="PUT">
 
         <div class="form-group">
           <label class="form-label">Department *</label>
@@ -73,7 +68,14 @@
             </svg>
           </span>
         </button>
-      </x-ajax-form>
+      </form>
+
+      <x-ajax-form
+        formId="editTeamForm"
+        btnId="editTeamBtn"
+        :action="route('organisation.teams.update', $team)"
+        method="PUT"
+      />
     </div>
   </div>
 </div>

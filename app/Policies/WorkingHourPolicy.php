@@ -12,11 +12,11 @@ class WorkingHourPolicy
 
     public function viewAny(User $user)
     {
-        return $user->can('view working hours');
+        return $user->can('working_hours.view');
     }
 
     public function update(User $user, WorkingHour $workingHour)
     {
-        return $user->can('edit working hours');
+        return $user->can('working_hours.manage');
     }
 }

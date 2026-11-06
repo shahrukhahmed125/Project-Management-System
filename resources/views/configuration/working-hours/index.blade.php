@@ -14,14 +14,9 @@
     <div class="card-body">
       <div id="toastContainer" style="position:fixed; top:20px; right:20px; z-index:9999;"></div>
 
-      <x-ajax-form
-        formId="workingHoursForm"
-        btnId="workingHoursBtn"
-        :action="route('configuration.working-hours.update')"
-        method="PUT"
-      >
+      <form id="workingHoursForm" action="{{ route('configuration.working-hours.update') }}" method="POST">
         @csrf
-        @method('PUT')
+        <input type="hidden" name="_method" value="PUT">
 
         <div class="table-responsive">
           <table class="table">
@@ -65,7 +60,14 @@
             </svg>
           </span>
         </button>
-      </x-ajax-form>
+      </form>
+
+      <x-ajax-form
+        formId="workingHoursForm"
+        btnId="workingHoursBtn"
+        :action="route('configuration.working-hours.update')"
+        method="PUT"
+      />
     </div>
   </div>
 </div>

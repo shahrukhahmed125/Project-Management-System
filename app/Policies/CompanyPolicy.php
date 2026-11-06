@@ -11,21 +11,21 @@ class CompanyPolicy
 
     public function viewProfile(User $user)
     {
-        return $user->can('view company');
+        return $user->can('company.view');
     }
 
     public function updateProfile(User $user)
     {
-        return $user->can('edit company');
+        return $user->can('company.update');
     }
 
     public function viewSettings(User $user)
     {
-        return $user->can('view company');
+        return $user->can('company.view');
     }
 
     public function updateSettings(User $user)
     {
-        return $user->can('edit company');
+        return $user->can('company.settings');
     }
 }

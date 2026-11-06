@@ -12,26 +12,26 @@ class DesignationPolicy
 
     public function viewAny(User $user)
     {
-        return $user->can('view designations');
+        return $user->can('designations.view');
     }
 
     public function view(User $user, Designation $designation)
     {
-        return $user->can('view designations');
+        return $user->can('designations.view');
     }
 
     public function create(User $user)
     {
-        return $user->can('create designations');
+        return $user->can('designations.create');
     }
 
     public function update(User $user, Designation $designation)
     {
-        return $user->can('edit designations');
+        return $user->can('designations.update');
     }
 
     public function delete(User $user, Designation $designation)
     {
-        return $user->can('delete designations');
+        return $user->can('designations.delete');
     }
 }

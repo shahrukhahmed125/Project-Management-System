@@ -12,36 +12,36 @@ class TeamPolicy
 
     public function viewAny(User $user)
     {
-        return $user->can('view teams');
+        return $user->can('teams.view');
     }
 
     public function view(User $user, Team $team)
     {
-        return $user->can('view teams') || $team->employees->contains($user->employee);
+        return $user->can('teams.view') || $team->employees->contains($user->employee);
     }
 
     public function create(User $user)
     {
-        return $user->can('create teams');
+        return $user->can('teams.create');
     }
 
     public function update(User $user, Team $team)
     {
-        return $user->can('edit teams') || $team->team_leader_id === $user->id;
+        return $user->can('teams.update') || $team->team_leader_id === $user->id;
     }
 
     public function delete(User $user, Team $team)
     {
-        return $user->can('delete teams');
+        return $user->can('teams.delete');
     }
 
     public function addMember(User $user, Team $team)
     {
-        return $user->can('edit teams') || $team->team_leader_id === $user->id;
+        return $user->can('teams.update') || $team->team_leader_id === $user->id;
     }
 
     public function removeMember(User $user, Team $team)
     {
-        return $user->can('edit teams') || $team->team_leader_id === $user->id;
+        return $user->can('teams.update') || $team->team_leader_id === $user->id;
     }
 }

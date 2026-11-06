@@ -17,12 +17,7 @@
     <div class="card-body">
       <div id="toastContainer" style="position:fixed; top:20px; right:20px; z-index:9999;"></div>
 
-      <x-ajax-form
-        formId="createDesignationForm"
-        btnId="createDesignationBtn"
-        :action="route('organisation.designations.store')"
-        method="POST"
-      >
+      <form id="createDesignationForm" action="{{ route('organisation.designations.store') }}" method="POST">
         @csrf
 
         <div class="form-group">
@@ -62,7 +57,14 @@
             </svg>
           </span>
         </button>
-      </x-ajax-form>
+      </form>
+
+      <x-ajax-form
+        formId="createDesignationForm"
+        btnId="createDesignationBtn"
+        :action="route('organisation.designations.store')"
+        method="POST"
+      />
     </div>
   </div>
 </div>
